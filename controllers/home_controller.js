@@ -1,11 +1,16 @@
 const Post = require('../models/post');
 module.exports.home = async (req, res) => {
-    // console.log("Cookies value : ", req.cookies);
-    const posts = await Post.find({});
+    try {
+        // Fetch the posts and populate the "user" field
+        const posts = await Post.find({}).populate('user');
 
-    // Render the home page with the posts
-    res.render('home', {
-        title: 'Codeial | Home',
-        posts: posts,
-    });
+        // Render the home page with the posts
+        res.render('home', {
+            title: 'Codeial | Home',
+            posts: posts,
+        });
+    } catch (err) {
+        console.error('Error in fetching and populating posts: ', err);
+        res.status(500).json({ error: 'Failed to fetch posts' });
+    }
 }
