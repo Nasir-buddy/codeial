@@ -8,9 +8,9 @@ const db = require('./config/mongoose');
 
 // used for session cookie
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
-const MongoStore = require('connect-mongo');
 const sassMiddleware = require('node-sass-middleware');
 app.use(sassMiddleware({
     src: './assets/scss',
@@ -45,7 +45,8 @@ app.use(session({
         maxAge: (1000 * 10 * 100)
     },
     store: MongoStore.create({
-        mongoUrl: 'mongodb+srv://nasir-ali:KNzAB6wNi6oSGZMs@cluster1.ktk27nx.mongodb.net/'
+        mongoUrl: 'mongodb+srv://nasir-ali:KNzAB6wNi6oSGZMs@cluster1.ktk27nx.mongodb.net/',
+        autoRemove: 'disabled'
     },
         function(err) {
             if (err) {

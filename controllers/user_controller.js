@@ -1,18 +1,19 @@
 const User = require('../models/user')
 
-module.exports.profile = (req, res)=>{
-
+module.exports.profile = async (req, res)=>{
+    // console.log('req user' ,req.user);
+    const user = await User.findById(req.params.id);
+    // console.log("user controller ",req.user.name);
     return res.render('users_profile',{
         title: "Entered in users directory",
-        name: "name",
-        email: "email"
+        profile_user : user
     })
 }
 
 //render the sign up page 
 module.exports.signUp = function(req, res){
     if(req.isAuthenticated()){
-        return res.redirect('/users/profile')
+        return res.redirect('/users/profile');
     }
     return res.render('user_sign_up',{
         title: "Codeial | Sign Up"
