@@ -11,14 +11,14 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
-const sassMiddleware = require('node-sass-middleware');
-app.use(sassMiddleware({
-    src: './assets/scss',
-    dest: './assets/css',
-    debug: false,
-    outputStyle: 'extended',
-    prefix: '/css'
-}));
+// const sassMiddleware = require('node-sass-middleware');
+// app.use(sassMiddleware({
+//     src: './assets/scss',
+//     dest: './assets/css',
+//     debug: false,
+//     outputStyle: 'extended',
+//     prefix: '/css'
+// }));
 app.use(express.urlencoded());
 
 app.use(cookieParser());
