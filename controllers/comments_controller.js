@@ -1,20 +1,20 @@
-const Comment = require('../models/comment');
+const comment = require('../models/comment');
 const Post = require('../models/post');
 
 module.exports.create = async (req, res) => {
     try {
         const post = await Post.findById(req.body.post).exec();
-
+    //    console.log(req.body)
         if (post) {
-            const comment = await Comment.create({
+            const data = await comment.create({
                 content: req.body.content,
                 post: req.body.post,
                 user: req.user._id
             });
 
             // Handle error if needed
-
-            post.comments.push(comment);
+            console.log(data)
+            post.comments.push(data);
             await post.save();
             res.redirect('/');
         }
