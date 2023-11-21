@@ -2,12 +2,13 @@ const User = require('../models/user')
 
 module.exports.profile = async (req, res)=>{
     // console.log('req user' ,req.user);
-    const user = await User.findById(req.params.id);
-    // console.log("user controller ",req.user.name);
-    return res.render('users_profile',{
-        title: "Entered in users directory",
-        profile_user : user
-    })
+    const user = await User.findById(req.params.id, function(err, user){
+        return res.render('users_profile',{
+            title: "Entered in users directory",
+            profile_user : user
+        });
+    });
+    // console.log("user controller ",req.user.name)  
 }
 
 //render the sign up page 

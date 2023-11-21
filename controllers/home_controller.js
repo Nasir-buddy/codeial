@@ -9,14 +9,16 @@ module.exports.home = async (req, res) => {
             populate: {
                 path: 'user'
             }
-        });
+        }).exec();
 
         // Render the home page with the posts
-        const users = await User.find({});
+        const users = await User.find({}).exec();
         res.render('home', {
             title: 'Codeial | Home',
             posts: posts,
+            all_user: users
         });
+        
     } catch (err) {
         console.error('Error in fetching and populating posts: ', err);
         res.status(500).json({ error: 'Failed to fetch posts' });
